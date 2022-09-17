@@ -1,0 +1,117 @@
+<div class="main">
+  <div class="firstsection">
+    <div class="movieinformaitons">
+      <h1 style="color:white;">Search a movie</h1>
+      <div class="searchbar">
+        <form #form="ngForm" action="app.component.ts" [formGroup]="myForm">
+          <div class="container">
+          <mat-card class="columns" >
+            <div class="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Min year</mat-label>
+            <input type="number" formControlName="start_year" matInput placeholder="2000" name="start_year" [(ngModel)]="start_year">
+            <!-- <ng-container *ngIf="myForm.get('start_year')?.dirty&&myForm.get('start_year')?.touched&&myForm.get('start_year')?.errors"> -->
+            <mat-hint *ngIf="myForm.get('start_year')?.errors?.['required']" >You have to enter a value</mat-hint>
+            <mat-hint *ngIf="myForm.get('start_year')?.errors?.['maxLength']" >You have to enter maximum 4 character</mat-hint>
+            <mat-hint *ngIf="myForm.get('start_year')?.errors?.['minlength']" >You have to enter at least 4 character</mat-hint>
+            <mat-hint *ngIf="myForm.get('start_year')?.errors?.['min']" >You have to enter a date minimum 1980</mat-hint>
+            <mat-hint *ngIf="myForm.get('start_year')?.errors?.['max']" >You have to enter a date maximum 2022</mat-hint>
+          <!-- </ng-container> -->
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Max year</mat-label>
+            <input type="number" formControlName="end_year" matInput placeholder="2022" name="end_year" [(ngModel)]="end_year">
+            <!-- <ng-container *ngIf="myForm.get('end_year')?.dirty&&myForm.get('end_year')?.touched&&myForm.get('end_year')?.errors"> -->
+            <mat-hint *ngIf="myForm.get('end_year')?.errors?.['required']">You have to enter a value</mat-hint>
+            <mat-hint *ngIf="myForm.get('end_year')?.errors?.['maxLength']" >You have to enter maximum 4 character</mat-hint>
+            <mat-hint *ngIf="myForm.get('end_year')?.errors?.['minlength']" >You have to enter at least 4 character</mat-hint>
+            <mat-hint *ngIf="myForm.get('end_year')?.errors?.['min']" >You have to enter a date minimum 1980</mat-hint>
+            <mat-hint *ngIf="myForm.get('end_year')?.errors?.['max']" >You have to enter a date maximum 2022</mat-hint>
+          <!-- </ng-container> -->
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field appearance="outline" >
+            <mat-label>Min Imdb</mat-label>
+            <input type="number" formControlName="min_imdb" matInput placeholder="5.8"name="min_imdb" [(ngModel)]="min_imdb" >
+            <!-- <ng-container *ngIf="myForm.get('min_imdb')?.dirty&&myForm.get('min_imdb')?.touched&&myForm.get('min_imdb')?.errors"> -->
+            <mat-hint *ngIf="myForm.get('min_imdb')?.errors?.['required']">You have to enter a value</mat-hint>
+            <mat-hint *ngIf="myForm.get('min_imdb')?.errors?.['min']" >You have to enter imdb point minimum 1</mat-hint>
+            <mat-hint *ngIf="myForm.get('min_imdb')?.errors?.['max']" >You have to enter imdb point maxumim 10</mat-hint>
+          <!-- </ng-container> -->
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Max Imdb</mat-label>
+            <input type="number" formControlName="max_imdb" matInput placeholder="9" name="max_imdb" [(ngModel)]="max_imdb">
+            <!-- <ng-container *ngIf="myForm.get('max_imdb')?.dirty&&myForm.get('max_imdb')?.touched&&myForm.get('max_imdb')?.errors"> -->
+            <mat-hint *ngIf="myForm.get('max_imdb')?.errors?.['required']">You have to enter a value</mat-hint>
+            <mat-hint *ngIf="myForm.get('max_imdb')?.errors?.['min']" >You have to enter imdb point minimum 1</mat-hint>
+            <mat-hint *ngIf="myForm.get('max_imdb')?.errors?.['max']" >You have to enter imdb point maxumim 10</mat-hint>
+          <!-- </ng-container> -->
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Type</mat-label>
+            <input formControlName="genre" matInput placeholder="Action" name="genre" [(ngModel)]="genre">
+            <!-- <ng-container *ngIf="myForm.get('genre')?.dirty&&myForm.get('genre')?.touched&&myForm.get('genre')?.errors"> -->
+            <mat-hint *ngIf="myForm.get('genre')?.errors?.['required']">You have to enter a value</mat-hint>
+          <!-- </ng-container> -->
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Language</mat-label>
+            <input formControlName="language" matInput placeholder="English"name="language" [(ngModel)]="language" >
+            <!-- <ng-container *ngIf="myForm.get('language')?.dirty&&myForm.get('language')?.touched&&myForm.get('language')?.errors"> -->
+            <mat-hint *ngIf="myForm.get('language')?.errors?.['required']">You have to enter a value</mat-hint>
+          <!-- </ng-container> -->
+          </mat-form-field>
+        </div>
+          <mat-form-field appearance="outline">
+            <mat-label>Movie or series</mat-label>
+            <input formControlName="type" matInput placeholder="Movie" name="type" [(ngModel)]="type">
+            <!-- <ng-container *ngIf="myForm.get('type')?.dirty&&myForm.get('language')?.touched&&myForm.get('language')?.errors"> -->
+            <mat-hint *ngIf="myForm.get('type')?.errors?.['required']">You have to enter a value</mat-hint>
+          <!-- </ng-container> -->
+          </mat-form-field>
+         <button [disabled]="myForm.invalid" mat-raised-button type="submit" (click)="onSubmit(start_year,end_year,min_imdb,max_imdb,genre,language,type)">Search</button>
+        </mat-card>
+      </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  <!-- geçerli mi form:{{myForm.get('start_year')?.valid|json}} -->
+  <div class="middlediv">
+    <h2>Today's suggestions movie:</h2>
+    <h1>{{movieData!.results[3].title}}</h1>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea repellendus maiores minima, nesciunt architecto alias ad quae consequuntur reiciendis amet id, exercitationem doloremque dignissimos earum.</p>
+  </div>
+  <div class="secondsection">
+    <div class="movieinformaitons">
+      <div class="container">
+        <div class="card">
+          <div class="imgBx">
+            <img [src]="movieData!.results[0].imageurl[0]">
+          </div>
+          <div class="contentBx" id="belowSection">
+            <h2 class="zindex">{{movieData!.results[0].title}}</h2>
+            <div class="size">
+              <span>Type:<br>{{movieData!.results[0].genre[0]}} <br>{{movieData!.results[0].genre[1]}}<br>{{movieData!.results[0].genre[2]}} </span>
+              <span>Imdb Rating:<br>{{movieData!.results[0].imdbrating}} </span>
+              <span>Released:<br>{{movieData!.results[0].released}} </span>
+              <span>Type:<br>{{movieData!.results[0].type}} </span>
+            </div>
+            <span class="description">{{movieData!.results[0].synopsis}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+
+
+
+
+<router-outlet></router-outlet>
